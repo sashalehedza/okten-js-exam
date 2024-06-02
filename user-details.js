@@ -90,6 +90,7 @@ fetch(`https://jsonplaceholder.typicode.com/users/${userId}`)
 
     button.addEventListener('click', () => {
       if (!postsVisible) {
+        postsVisible = true
         fetch(`https://jsonplaceholder.typicode.com/users/${userId}/posts`)
           .then((response) => response.json())
           .then((posts) => {
@@ -113,16 +114,15 @@ fetch(`https://jsonplaceholder.typicode.com/users/${userId}`)
                 postBlock.append(visitButton)
                 postsDiv.append(postBlock)
               })
-              postsVisible = true
             }
           })
       } else {
+        postsVisible = false
         const postsDiv = document.querySelector('.posts')
         if (postsDiv) {
           postsDiv.remove()
         }
         button.textContent = 'User posts'
-        postsVisible = false
       }
     })
   })
