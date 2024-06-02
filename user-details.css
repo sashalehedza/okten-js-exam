@@ -52,4 +52,9 @@ button {
 .post {
   border: 1px solid black;
   padding: 10px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 10px;
 }
