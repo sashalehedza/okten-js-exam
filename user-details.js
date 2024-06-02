@@ -1,10 +1,5 @@
-// На странице user-details.html:
-// 4 Вивести всю, без виключення, інформацію про об'єкт user на який клікнули
-// 5 Додати кнопку "post of current user", при кліку на яку, з'являються title всіх постів поточного юзера
-// (для получения постов используйте эндпоинт https://jsonplaceholder.typicode.com/users/USER_ID/posts)
-// 6 Каждому посту додати кнопку/посилання, при кліку на яку відбувається перехід на сторінку post-details.html, котра має детальну інфу про поточний пост.const userId = new URLSearchParams(window.location.search).get('id')
-
 const userId = new URLSearchParams(window.location.search).get('id')
+
 fetch(`https://jsonplaceholder.typicode.com/users/${userId}`)
   .then((response) => response.json())
   .then((user) => {
@@ -36,7 +31,7 @@ fetch(`https://jsonplaceholder.typicode.com/users/${userId}`)
     const email = document.createElement('p')
     email.textContent = `Email: ${user.email}`
 
-    const address = document.createElement('div')
+    const addressDiv = document.createElement('div')
 
     const street = document.createElement('p')
     street.textContent = `Street: ${user.address.street}`
@@ -53,7 +48,7 @@ fetch(`https://jsonplaceholder.typicode.com/users/${userId}`)
     const geo = document.createElement('p')
     geo.textContent = `Geo: ${user.address.geo.lat}, ${user.address.geo.lng}`
 
-    address.append(street, suite, city, zipcode, geo)
+    addressDiv.append(street, suite, city, zipcode, geo)
 
     const phone = document.createElement('p')
     phone.textContent = `Phone: ${user.phone}`
@@ -61,7 +56,7 @@ fetch(`https://jsonplaceholder.typicode.com/users/${userId}`)
     const website = document.createElement('p')
     website.textContent = `Website: ${user.website}`
 
-    const company = document.createElement('div')
+    const companyDiv = document.createElement('div')
 
     const companyName = document.createElement('p')
     companyName.textContent = `Company: ${user.company.name}`
@@ -72,48 +67,63 @@ fetch(`https://jsonplaceholder.typicode.com/users/${userId}`)
     const companyBs = document.createElement('p')
     companyBs.textContent = `Bs: ${user.company.bs}`
 
-    company.append(companyName, companyCatchPhrase, companyBs)
+    companyDiv.append(companyName, companyCatchPhrase, companyBs)
 
     userInfoDiv.append(
       id,
       name,
       username,
       email,
-      address,
+      addressDiv,
       phone,
       website,
-      company
+      companyDiv
     )
     containerDiv.append(userInfoDiv)
 
     const button = document.createElement('button')
     button.classList.add('posts-info-btn')
-    button.textContent = 'Posts of current user'
+    button.textContent = 'User posts'
     containerDiv.append(button)
 
-    const postsDiv = document.createElement('div')
-    postsDiv.classList.add('posts')
-    containerDiv.append(postsDiv)
+    let postsVisible = false
+
     button.addEventListener('click', () => {
-      fetch(`https://jsonplaceholder.typicode.com/users/${userId}/posts`)
-        .then((response) => response.json())
-        .then((posts) => {
-          posts.forEach((post) => {
-            const postBlock = document.createElement('div')
-            postBlock.classList.add('post')
-            const title = document.createElement('p')
-            title.textContent = post.title
-            postBlock.append(title)
-            const button = document.createElement('button')
-            button.textContent = 'details'
-            button.classList.add('posts-info')
-            button.addEventListener('click', () => {
-              window.location.href = `post-details.html?id=${post.id}`
-            })
-            postBlock.append(button)
-            postsDiv.append(postBlock)
+      if (!postsVisible) {
+        fetch(`https://jsonplaceholder.typicode.com/users/${userId}/posts`)
+          .then((response) => response.json())
+          .then((posts) => {
+            if (posts.length > 0) {
+              const postsDiv = document.createElement('div')
+              postsDiv.classList.add('posts')
+              containerDiv.append(postsDiv)
+              button.textContent = 'Hide posts'
+              posts.forEach((post) => {
+                const postBlock = document.createElement('div')
+                postBlock.classList.add('post')
+                const title = document.createElement('p')
+                title.textContent = post.title
+                postBlock.append(title)
+                const visitButton = document.createElement('button')
+                visitButton.textContent = 'Visit post'
+                visitButton.classList.add('posts-info')
+                visitButton.addEventListener('click', () => {
+                  window.location.href = `post-details.html?id=${post.id}`
+                })
+                postBlock.append(visitButton)
+                postsDiv.append(postBlock)
+              })
+              postsVisible = true
+            }
           })
-        })
+      } else {
+        const postsDiv = document.querySelector('.posts')
+        if (postsDiv) {
+          postsDiv.remove()
+        }
+        button.textContent = 'User posts'
+        postsVisible = false
+      }
     })
   })
   .catch((error) => console.log(error))
