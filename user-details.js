@@ -85,7 +85,7 @@ fetch(`https://jsonplaceholder.typicode.com/users/${userId}`)
 
     const button = document.createElement('button')
     button.classList.add('posts-info-btn')
-    button.textContent = 'User posts'
+    button.textContent = 'post of current user'
     containerDiv.append(button)
 
     button.addEventListener('click', () => {
@@ -99,7 +99,7 @@ fetch(`https://jsonplaceholder.typicode.com/users/${userId}`)
               const postsDiv = document.createElement('div')
               postsDiv.classList.add('posts')
               containerDiv.append(postsDiv)
-              button.textContent = 'Hide posts'
+              button.textContent = 'hide posts'
               posts.forEach((post) => {
                 const postBlock = document.createElement('div')
                 postBlock.classList.add('post')
@@ -128,7 +128,7 @@ fetch(`https://jsonplaceholder.typicode.com/users/${userId}`)
         if (postsDiv) {
           postsDiv.remove()
         }
-        button.textContent = 'User posts'
+        button.textContent = 'post of current user'
       }
     })
   })
