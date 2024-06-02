@@ -46,9 +46,12 @@ button {
 }
 
 .posts {
+  background-color: rgb(158, 159, 152);
+  border-radius: 10px;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 10px;
+  padding: 10px;
 }
 
 .post {
