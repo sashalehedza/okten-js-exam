@@ -1,5 +1,7 @@
 const userId = new URLSearchParams(window.location.search).get('id')
 
+let postsVisible = false
+
 fetch(`https://jsonplaceholder.typicode.com/users/${userId}`)
   .then((response) => response.json())
   .then((user) => {
@@ -86,11 +88,10 @@ fetch(`https://jsonplaceholder.typicode.com/users/${userId}`)
     button.textContent = 'User posts'
     containerDiv.append(button)
 
-    let postsVisible = false
-
     button.addEventListener('click', () => {
       if (!postsVisible) {
         postsVisible = true
+        button.disabled = true
         fetch(`https://jsonplaceholder.typicode.com/users/${userId}/posts`)
           .then((response) => response.json())
           .then((posts) => {
@@ -115,6 +116,11 @@ fetch(`https://jsonplaceholder.typicode.com/users/${userId}`)
                 postsDiv.append(postBlock)
               })
             }
+            button.disabled = false
+          })
+          .catch((error) => {
+            console.log(error)
+            button.disabled = false
           })
       } else {
         postsVisible = false
