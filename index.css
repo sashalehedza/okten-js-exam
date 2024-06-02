@@ -43,7 +43,8 @@ button {
 }
 
 .user {
-  border: 1px solid black;
+  background-color: rgb(59, 60, 56);
+  color: white;
   padding: 10px;
   border-radius: 10px;
   display: flex;
