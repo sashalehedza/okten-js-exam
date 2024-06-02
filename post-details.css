@@ -45,7 +45,7 @@ button {
 }
 
 .comments {
-  border: 1px solid black;
+  background-color: rgb(158, 159, 152);
   border-radius: 10px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
