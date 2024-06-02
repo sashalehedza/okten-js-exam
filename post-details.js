@@ -27,6 +27,11 @@ const postDiv = document.createElement('div')
 postDiv.classList.add('post')
 containerDiv.append(postDiv)
 
+const pageTitleComments = document.createElement('h1')
+pageTitleComments.classList.add('page-title')
+pageTitleComments.textContent = 'Comments'
+containerDiv.append(pageTitleComments)
+
 const commentsDiv = document.createElement('div')
 commentsDiv.classList.add('comments')
 containerDiv.append(commentsDiv)
