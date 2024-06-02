@@ -16,6 +16,11 @@ const containerDiv = document.createElement('div')
 containerDiv.classList.add('container')
 wrapperDiv.append(containerDiv)
 
+const pageTitle = document.createElement('h1')
+pageTitle.classList.add('page-title')
+pageTitle.textContent = 'Post details'
+containerDiv.append(pageTitle)
+
 const postId = new URLSearchParams(window.location.search).get('id')
 fetch(`https://jsonplaceholder.typicode.com/posts/${postId}`)
   .then((response) => response.json())

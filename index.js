@@ -16,6 +16,11 @@ fetch('https://jsonplaceholder.typicode.com/users')
     containerDiv.classList.add('container')
     wrapperDiv.append(containerDiv)
 
+    const pageTitle = document.createElement('h1')
+    pageTitle.classList.add('page-title')
+    pageTitle.textContent = 'Users'
+    containerDiv.append(pageTitle)
+
     const usersDiv = document.createElement('div')
     usersDiv.classList.add('users')
     containerDiv.append(usersDiv)
