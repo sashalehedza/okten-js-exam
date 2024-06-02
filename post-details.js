@@ -22,11 +22,18 @@ pageTitle.textContent = 'Post details'
 containerDiv.append(pageTitle)
 
 const postId = new URLSearchParams(window.location.search).get('id')
+
+const postDiv = document.createElement('div')
+postDiv.classList.add('post')
+containerDiv.append(postDiv)
+
+const commentsDiv = document.createElement('div')
+commentsDiv.classList.add('comments')
+containerDiv.append(commentsDiv)
+
 fetch(`https://jsonplaceholder.typicode.com/posts/${postId}`)
   .then((response) => response.json())
   .then((post) => {
-    const postDiv = document.createElement('div')
-    postDiv.classList.add('post')
     const userId = document.createElement('p')
     userId.textContent = `UserID: ${post.userId}`
     const id = document.createElement('p')
@@ -36,16 +43,12 @@ fetch(`https://jsonplaceholder.typicode.com/posts/${postId}`)
     const body = document.createElement('p')
     body.textContent = `Body: ${post.body}`
     postDiv.append(userId, id, title, body)
-    containerDiv.append(postDiv)
   })
   .catch((error) => console.log(error))
 
 fetch(`https://jsonplaceholder.typicode.com/posts/${postId}/comments`)
   .then((response) => response.json())
   .then((comments) => {
-    const commentsDiv = document.createElement('div')
-    commentsDiv.classList.add('comments')
-    containerDiv.append(commentsDiv)
     comments.forEach((comment) => {
       const commentDiv = document.createElement('div')
       commentDiv.classList.add('comment')
