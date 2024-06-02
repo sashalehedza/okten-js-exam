@@ -1,0 +1,38 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 100%;
+}
+
+button {
+  background-color: rgb(89, 190, 237);
+  color: white;
+  padding: 10px;
+  text-decoration: none;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.wrapper {
+  width: 100vw;
+}
+
+.container {
+  width: 90vw;
+  margin: 0 auto;
+}
+
+.posts-info-btn {
+  width: 100%;
+}
+
+.posts {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+}
