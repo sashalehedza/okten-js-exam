@@ -31,10 +31,13 @@ fetch('https://jsonplaceholder.typicode.com/users')
       id.textContent = `ID: ${user.id}`
       const name = document.createElement('p')
       name.textContent = `Name: ${user.name}`
-      const link = document.createElement('a')
-      link.textContent = 'user-details'
-      link.href = `user-details.html?id=${user.id}`
-      userDiv.append(id, name, link)
+      const button = document.createElement('button')
+      button.textContent = 'Visit post'
+      button.classList.add('posts-info')
+      button.addEventListener('click', () => {
+        window.location.href = `user-details.html?id=${user.id}`
+      })
+      userDiv.append(id, name, button)
       usersDiv.append(userDiv)
     })
   })
