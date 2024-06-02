@@ -105,7 +105,7 @@ fetch(`https://jsonplaceholder.typicode.com/users/${userId}`)
             title.textContent = post.title
             postBlock.append(title)
             const button = document.createElement('button')
-            button.textContent = 'Visit post'
+            button.textContent = 'details'
             button.classList.add('posts-info')
             button.addEventListener('click', () => {
               window.location.href = `post-details.html?id=${post.id}`

@@ -32,7 +32,7 @@ fetch('https://jsonplaceholder.typicode.com/users')
       const name = document.createElement('p')
       name.textContent = `Name: ${user.name}`
       const button = document.createElement('button')
-      button.textContent = 'Visit post'
+      button.textContent = 'details'
       button.classList.add('posts-info')
       button.addEventListener('click', () => {
         window.location.href = `user-details.html?id=${user.id}`
