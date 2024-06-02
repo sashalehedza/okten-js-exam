@@ -22,13 +22,15 @@ fetch(`https://jsonplaceholder.typicode.com/posts/${postId}`)
   .then((post) => {
     const postDiv = document.createElement('div')
     postDiv.classList.add('post')
+    const userId = document.createElement('p')
+    userId.textContent = `UserID: ${post.userId}`
     const id = document.createElement('p')
-    id.textContent = post.id
-    const title = document.createElement('h3')
-    title.textContent = post.title
+    id.textContent = `ID: ${post.id}`
+    const title = document.createElement('p')
+    title.textContent = `Title: ${post.title}`
     const body = document.createElement('p')
-    body.textContent = post.body
-    postDiv.append(id, title, body)
+    body.textContent = `Body: ${post.body}`
+    postDiv.append(userId, id, title, body)
     containerDiv.append(postDiv)
   })
   .catch((error) => console.log(error))
